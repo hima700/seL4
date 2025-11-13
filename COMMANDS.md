@@ -103,3 +103,51 @@ git checkout -b step-2-ipc
 git checkout -b step-3-isolation
 ```
 
+## Build and Test Process
+
+### Toolchain Setup
+- Created scripts/setup_toolchain.sh to download ARM GNU toolchain automatically
+- Toolchain downloaded to $HOME/.local/arm-toolchain/ (123MB download)
+- Build script automatically adds toolchain to PATH if not found
+
+### Build Commands Executed
+```bash
+# Setup toolchain (first time only)
+source scripts/setup_toolchain.sh
+
+# Build hello world
+export PATH=$HOME/.local/arm-toolchain/arm-gnu-toolchain-13.2.Rel1-x86_64-aarch64-none-elf/bin:/usr/bin:/bin:/usr/local/bin:$PATH
+./scripts/build.sh hello_world qemu_virt_aarch64 debug
+
+# Build IPC demo
+./scripts/build.sh ipc_demo qemu_virt_aarch64 debug
+```
+
+### Build Results
+- hello_world: SUCCESS - loader.img created (2.4MB)
+- ipc_demo: SUCCESS - loader.img created (2.4MB)
+- All components (client, server, logger) compiled successfully
+
+### Errors Encountered and Fixed
+
+1. **aarch64-none-elf-gcc: No such file or directory**
+   - Fixed: Created setup_toolchain.sh and modified build.sh to auto-detect toolchain
+
+2. **dirname/mkdir: command not found**
+   - Fixed: Added PATH setup at beginning of build.sh
+
+3. **undefined reference to `shared_buffer`**
+   - Fixed: Changed from `extern char shared_buffer[]` to `uintptr_t shared_buffer = 0;`
+   - Added SHARED_BUF macro for pointer cast access
+
+4. **invalid attribute 'badge' on element 'end'**
+   - Fixed: Removed badge="1" attribute from system.system (badges auto-assigned)
+
+5. **microkit_msginfo_get_badge: implicit declaration**
+   - Fixed: Removed badge access code (function doesn't exist in Microkit API)
+
+### Testing Status
+- Builds: Both applications build successfully
+- QEMU: Not yet installed (requires: sudo apt install qemu-system-arm)
+- Images: Ready for testing once QEMU is installed
+
