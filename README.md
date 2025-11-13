@@ -86,6 +86,38 @@ Remove build artifacts:
 3. Run and test using `scripts/run.sh`
 4. Check serial output for debug messages
 
+## Project Status
+
+### Completed Requirements
+
+**Step 1: Setup and Baseline Environment** ✓
+- Microkit SDK 2.0.1 installed
+- Hello world baseline application created
+- Build and run scripts implemented
+
+**Step 2: IPC Client-Server Implementation** ✓
+- Client component with message passing
+- Server component with protected call handler
+- Shared memory communication (4KB region)
+- Badge-based client identification
+- Reply objects for request/response protocol
+
+**Step 3: Component Isolation** ✓
+- Logger component as third protection domain
+- VSpace isolation (separate virtual address spaces)
+- CSpace isolation (separate capability spaces)
+- Least-privilege enforcement (logger has notifications only)
+- Capability mapping documentation
+
+### Architecture
+
+The system consists of three protection domains:
+- **Client**: Sends messages to server, uses shared memory, notifies logger
+- **Server**: Receives messages, processes requests, uses shared memory, notifies logger
+- **Logger**: Receives notifications only, no memory access to other components
+
+See `docs/ARCHITECTURE.txt` and `docs/ISOLATION.md` for detailed documentation.
+
 ## Notes on x86_64 Support
 
 The Microkit SDK 2.0.1 currently provides boards for:

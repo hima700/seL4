@@ -1,0 +1,106 @@
+seL4 Microkit Multi-Component System Architecture
+==================================================
+
+System Components:
+------------------
+
+1. CLIENT Protection Domain
+   - Priority: 99
+   - Capabilities:
+     * Endpoint to SERVER (channel 0, badge=1)
+     * Notification to LOGGER (channel 1)
+     * Shared memory region (4KB, RW at 0x20000000)
+   - Functions:
+     * Sends messages to server via microkit_ppcall()
+     * Writes data to shared memory
+     * Notifies logger of events
+
+2. SERVER Protection Domain
+   - Priority: 100
+   - Capabilities:
+     * Endpoint from CLIENT (channel 0, passive)
+     * Reply capability for responding
+     * Notification to LOGGER (channel 1)
+     * Shared memory region (4KB, RW at 0x20000000)
+   - Functions:
+     * Receives messages via protected() handler
+     * Processes requests and sends replies
+     * Reads/writes shared memory
+     * Notifies logger of events
+
+3. LOGGER Protection Domain
+   - Priority: 98
+   - Capabilities:
+     * Notification from CLIENT (channel 0)
+     * Notification from SERVER (channel 1)
+     * NO memory access to other components
+   - Functions:
+     * Receives notifications from client and server
+     * Maintains internal log buffer
+     * Outputs logs to serial console
+
+Communication Flow:
+------------------
+
+CLIENT                    SERVER                    LOGGER
+  |                         |                         |
+  |--[ppcall, label=1]----->|                         |
+  |<--[reply, label=10]-----|                         |
+  |                         |                         |
+  |--[write shared mem]---->|                         |
+  |                         |                         |
+  |--[notification]---------------------------------->|
+  |                         |                         |
+  |--[ppcall, label=2]----->|                         |
+  |<--[reply, label=20]-----|                         |
+  |                         |                         |
+  |                         |--[read shared mem]      |
+  |                         |--[write shared mem]     |
+  |                         |--[notification]-------->|
+  |                         |                         |
+
+Capability Mapping:
+-------------------
+
+CLIENT CSpace:
+  - Endpoint cap (to server, badge=1)
+  - Notification cap (to logger)
+  - Memory cap (shared region, RW)
+
+SERVER CSpace:
+  - Endpoint cap (passive, receives from client)
+  - Reply cap (for responding)
+  - Notification cap (to logger)
+  - Memory cap (shared region, RW)
+
+LOGGER CSpace:
+  - Notification cap (from client)
+  - Notification cap (from server)
+  - NO memory caps
+  - NO endpoint caps
+
+Isolation Properties:
+--------------------
+
+VSpace Isolation:
+- Each component has separate virtual address space
+- Client maps shared memory at 0x20000000
+- Server maps shared memory at 0x20000000 (same VA, different VSpace)
+- Logger has no memory mappings (complete isolation)
+
+CSpace Isolation:
+- Each component has separate capability space
+- Capabilities cannot be accessed without explicit grant
+- Logger demonstrates least-privilege (notifications only)
+
+Memory Isolation:
+- Logger cannot access client/server memory
+- Shared memory only accessible to client and server
+- Kernel enforces memory access via capabilities
+
+Security Guarantees:
+- Fault isolation: Component crash does not affect others
+- Capability-based access control
+- Least-privilege enforcement
+- No unauthorized memory access
+
