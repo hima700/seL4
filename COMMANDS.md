@@ -54,3 +54,27 @@ chmod +x scripts/build.sh scripts/run.sh scripts/clean.sh
 - Current SDK supports qemu_virt_aarch64 and qemu_virt_riscv64 boards
 - Build scripts configured for available boards
 
+## Step 2: IPC Client-Server Implementation
+
+### Branch Creation
+- Created branch `step-2-ipc` for Step 2 work
+
+### IPC Components Created
+- Created microkit/ipc_demo/client.c - IPC client with message passing and shared memory
+- Created microkit/ipc_demo/server.c - IPC server with protected call handler and notification handler
+- Created microkit/ipc_demo/system.system - System configuration with 2 protection domains, shared memory, and endpoint
+- Created microkit/ipc_demo/Makefile - Build configuration for IPC demo
+
+### IPC Features Implemented
+- Message passing via microkit_ppcall() with reply objects
+- Badge-based client identification (badge=1)
+- Shared memory region (4KB) mapped to both client and server
+- Notification mechanism for shared memory synchronization
+- Multiple message types (label 1 and 2) demonstrating request/response protocol
+
+### Commands Executed
+```bash
+# Branch creation
+git checkout -b step-2-ipc
+```
+

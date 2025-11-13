@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright 2025
+ seL4 Microkit IPC Demo System Configuration
+
+ SPDX-License-Identifier: BSD-2-Clause
+-->
+<system>
+    <!-- Server protection domain -->
+    <protection_domain name="server" priority="100">
+        <program_image path="server.elf" />
+        <map mr="shared_mem" vaddr="0x20000000" perms="rw" setvar_vaddr="shared_buffer" />
+    </protection_domain>
+
+    <!-- Client protection domain -->
+    <protection_domain name="client" priority="99">
+        <program_image path="client.elf" />
+        <map mr="shared_mem" vaddr="0x20000000" perms="rw" setvar_vaddr="shared_buffer" />
+    </protection_domain>
+
+    <!-- Shared memory region (4KB page) -->
+    <memory_region name="shared_mem" size="0x1000" page_size="0x1000" />
+
+    <!-- IPC channel between client and server -->
+    <channel>
+        <end pd="server" id="0" />
+        <end pd="client" id="0" pp="true" badge="1" />
+    </channel>
+
+</system>
+
