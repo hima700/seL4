@@ -12,7 +12,12 @@
 #define SHARED_MEMORY_SIZE 4096
 
 /* Shared memory region (mapped by system) */
-extern char shared_buffer[SHARED_MEMORY_SIZE];
+/* The system.system file sets setvar_vaddr="shared_buffer" which creates a uintptr_t variable */
+/* Default to 0, Microkit tool will patch this with actual virtual address */
+uintptr_t shared_buffer = 0;
+
+/* Helper macro to access shared memory as a char array */
+#define SHARED_BUF ((char *)shared_buffer)
 
 void init(void)
 {
@@ -32,9 +37,9 @@ void init(void)
     microkit_dbg_puts("CLIENT|INFO: Writing to shared memory\n");
     const char *test_data = "Hello from client via shared memory!";
     for (int i = 0; test_data[i] != '\0' && i < SHARED_MEMORY_SIZE - 1; i++) {
-        shared_buffer[i] = test_data[i];
+        SHARED_BUF[i] = test_data[i];
     }
-    shared_buffer[SHARED_MEMORY_SIZE - 1] = '\0';
+    SHARED_BUF[SHARED_MEMORY_SIZE - 1] = '\0';
 
     /* Notify server that data is ready */
     microkit_dbg_puts("CLIENT|INFO: Notifying server about shared memory data\n");

@@ -30,7 +30,7 @@
     <!-- IPC channel between client and server -->
     <channel>
         <end pd="server" id="0" />
-        <end pd="client" id="0" pp="true" badge="1" />
+        <end pd="client" id="0" pp="true" />
     </channel>
 
     <!-- Notification channel: client -> logger -->
