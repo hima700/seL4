@@ -1,11 +1,115 @@
+# seL4 Microkernel Multi-Component System
+
+This project implements a PC-based seL4 microkernel system using Microkit on x86_64 via QEMU. It demonstrates IPC, capability-based isolation, and component architecture.
+
+## Project Structure
+
+```
+seL4/
+├── microkit/           # Microkit applications
+│   ├── hello_world/    # Baseline hello world (Step 1)
+│   └── ipc_demo/       # Client-server-logger (Steps 2-3)
+├── microkit-sdk/       # Microkit SDK 2.0.1
+├── scripts/            # Build and run scripts
+│   ├── build.sh        # Build applications
+│   ├── run.sh          # Run in QEMU
+│   └── clean.sh        # Clean build artifacts
+├── docs/               # Architecture diagrams
+├── out/                # Build output directory
+├── seL4-CAmkES-L4v-dockerfiles/  # Docker build environment
+├── COMMANDS.md         # Command trace log
+└── README.md           # This file
+```
+
+## Requirements
+
+- Windows 10/11 with WSL2 (Ubuntu)
+- Docker Desktop (for seL4 build container)
+- QEMU (for running virtualized systems)
+- Make and standard build tools
+
+## Quick Start
+
+### Step 1: Setup and Baseline Environment
+
+1. **Verify WSL2 and Docker:**
+   ```powershell
+   wsl --status
+   docker --version
+   ```
+
+2. **Build hello world application:**
+   ```bash
+   # In WSL2
+   cd /mnt/c/Users/Ibrah/Desktop/RA/sel4/seL4
+   ./scripts/build.sh hello_world qemu_virt_aarch64 debug
+   ```
+
+3. **Run in QEMU:**
+   ```bash
+   ./scripts/run.sh hello_world qemu_virt_aarch64 debug
+   ```
+
+### Building
+
+The build script requires:
+- Application name (hello_world or ipc_demo)
+- Board (qemu_virt_aarch64, qemu_virt_riscv64)
+- Config (debug, release, benchmark)
+
+Example:
+```bash
+./scripts/build.sh hello_world qemu_virt_aarch64 debug
+```
+
+### Running
+
+The run script launches QEMU with the built image:
+```bash
+./scripts/run.sh hello_world qemu_virt_aarch64 debug
+```
+
+Press `Ctrl+A` then `X` to exit QEMU.
+
+### Cleaning
+
+Remove build artifacts:
+```bash
+./scripts/clean.sh          # Clean all
+./scripts/clean.sh hello_world  # Clean specific app
+```
+
+## Development Workflow
+
+1. Edit source files in `microkit/` directories
+2. Build using `scripts/build.sh`
+3. Run and test using `scripts/run.sh`
+4. Check serial output for debug messages
+
+## Notes on x86_64 Support
+
+The Microkit SDK 2.0.1 currently provides boards for:
+- `qemu_virt_aarch64` (ARM64)
+- `qemu_virt_riscv64` (RISC-V)
+
+For x86_64 QEMU support, you may need to:
+- Use the seL4 docker container: `cd seL4-CAmkES-L4v-dockerfiles && make user`
+- Build seL4 separately for x86_64 platform
+- Check Microkit SDK documentation for x86_64 board support
+
+---
+
+## Original seL4 Build Environment Setup
+
+This section documents the original seL4 build environment setup using Docker.
 
 # seL4 Build Environment Setup and Repo Cheatsheet
 
-This README walks you through setting up a build environment for seL4, Microkit and CAmkES using Docker, and using the repo tool for source dependency management.
+This README walks you through setting up a build environment for seL4, Microkit and CAmkES using Docker, and using the repo tool for source dependency management.
 
 ## 1. Prerequisites: Docker Installation
 
-Before you begin, you need to install Docker on your system. Below are general instructions; for detailed platform‑specific steps refer to Docker’s official documentation [docs.docker.com](https://docs.docker.com).
+Before you begin, you need to install Docker on your system. Below are general instructions; for detailed platform‑specific steps refer to Docker's official documentation [docs.docker.com](https://docs.docker.com).
 
 ### On Ubuntu / Debian
 
@@ -20,7 +124,7 @@ sudo usermod -aG docker $(whoami)
 
 ### On other Linux distributions
 
-Use your distribution’s package manager (e.g., `dnf`, `yum`, `pacman`) to install Docker or follow the instructions at the Docker site. Then add your user to the `docker` group:
+Use your distribution's package manager (e.g., `dnf`, `yum`, `pacman`) to install Docker or follow the instructions at the Docker site. Then add your user to the `docker` group:
 
 ```bash
 sudo usermod -aG docker $(whoami)  
@@ -34,7 +138,7 @@ Install Docker Desktop from [docs.docker.com](https://docs.docker.com). After in
 
 ## 2. Using Docker for seL4, Microkit, and CAmkES
 
-This section is adapted from the “Using Docker” page of the seL4 documentation.
+This section is adapted from the "Using Docker" page of the seL4 documentation.
 
 ### Requirements
 
@@ -90,8 +194,8 @@ to start the container in the current directory you are in.
 
 A good workflow is to run two terminals:
 
-* Terminal A is a normal terminal, and is used for git and editing (e.g., vim, emacs, vscode).
-* Terminal B is running a Docker container, and is only used for compilation.
+* Terminal A is a normal terminal, and is used for git and editing (e.g., vim, emacs, vscode).
+* Terminal B is running a Docker container, and is only used for compilation.
   This gives you the flexibility to use all the tools you are used to, while having the seL4 dependencies separated from your machine.
 
 #### Compiling seL4 test
@@ -106,7 +210,7 @@ jblogs@host:~/seL4test$ repo init -u https://github.com/seL4/sel4test-manifest.g
 jblogs@host:~/seL4test$ repo sync  
 ```
 
-In terminal B, run these commands:
+In terminal B, run these commands:
 
 ```bash
 jblogs@host:~/seL4test$ container  # using the bash alias defined above  
@@ -116,7 +220,7 @@ jblogs@in-container:/host/build-x86$ ../init-build.sh -DPLATFORM=x86_64 -DSIMULA
 jblogs@in-container:/host/build-x86$ ninja  
 ```
 
-If you need to make any code modifications or commit things to git, use terminal A. If you need to recompile or simulate an image, use terminal B.
+If you need to make any code modifications or commit things to git, use terminal A. If you need to recompile or simulate an image, use terminal B.
 
 > **Note:** If QEMU fails when trying to simulate the image, try configuring your Docker host to give the container more memory.
 
