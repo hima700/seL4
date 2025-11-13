@@ -8,6 +8,7 @@
 #include <microkit.h>
 
 #define CLIENT_CH 0
+#define LOGGER_CH 1
 #define SHARED_MEMORY_SIZE 4096
 
 /* Shared memory region (mapped by system) */
@@ -67,6 +68,12 @@ void notified(microkit_channel ch)
         shared_buffer[SHARED_MEMORY_SIZE - 1] = '\0';
 
         microkit_dbg_puts("SERVER|INFO: Wrote response to shared memory\n");
+        
+        /* Notify logger */
+        microkit_dbg_puts("SERVER|INFO: Notifying logger\n");
+        microkit_notify(LOGGER_CH);
+    } else if (ch == LOGGER_CH) {
+        microkit_dbg_puts("SERVER|INFO: Received notification from logger\n");
     } else {
         microkit_dbg_puts("SERVER|WARN: Received notification on unexpected channel\n");
     }

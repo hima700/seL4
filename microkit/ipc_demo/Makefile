@@ -44,8 +44,9 @@ MICROKIT_TOOL ?= $(MICROKIT_SDK)/bin/microkit
 
 CLIENT_OBJS := client.o
 SERVER_OBJS := server.o
+LOGGER_OBJS := logger.o
 
-IMAGES := client.elf server.elf
+IMAGES := client.elf server.elf logger.elf
 CFLAGS := -mstrict-align -nostdlib -ffreestanding -g -O3 -Wall -Wno-unused-function -Werror -I$(BOARD_DIR)/include $(CFLAGS_ARCH)
 LDFLAGS := -L$(BOARD_DIR)/lib
 LIBS := -lmicrokit -Tmicrokit.ld
@@ -62,6 +63,9 @@ $(BUILD_DIR)/client.elf: $(addprefix $(BUILD_DIR)/, $(CLIENT_OBJS))
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 $(BUILD_DIR)/server.elf: $(addprefix $(BUILD_DIR)/, $(SERVER_OBJS))
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+$(BUILD_DIR)/logger.elf: $(addprefix $(BUILD_DIR)/, $(LOGGER_OBJS))
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 $(IMAGE_FILE) $(REPORT_FILE): $(addprefix $(BUILD_DIR)/, $(IMAGES)) system.system

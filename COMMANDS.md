@@ -78,3 +78,28 @@ chmod +x scripts/build.sh scripts/run.sh scripts/clean.sh
 git checkout -b step-2-ipc
 ```
 
+## Step 3: Component Isolation
+
+### Branch Creation
+- Created branch `step-3-isolation` for Step 3 work
+
+### Logger Component Created
+- Created microkit/ipc_demo/logger.c - Logger component with minimal capabilities
+- Updated client.c to notify logger
+- Updated server.c to notify logger
+- Updated system.system to include logger protection domain with isolation configuration
+- Updated Makefile to build logger component
+
+### Isolation Features Demonstrated
+- VSpace isolation: Each component has separate virtual address space
+- CSpace isolation: Separate capability spaces with minimal grants
+- Least-privilege: Logger has NO memory access to client/server (notifications only)
+- Capability mapping: Client has endpoint+memory, Server has endpoint+memory+reply, Logger has notifications only
+- Created docs/ISOLATION.md documenting isolation mechanisms
+
+### Commands Executed
+```bash
+# Branch creation
+git checkout -b step-3-isolation
+```
+

@@ -18,13 +18,31 @@
         <map mr="shared_mem" vaddr="0x20000000" perms="rw" setvar_vaddr="shared_buffer" />
     </protection_domain>
 
-    <!-- Shared memory region (4KB page) -->
+    <!-- Logger protection domain (minimal capabilities) -->
+    <protection_domain name="logger" priority="98">
+        <program_image path="logger.elf" />
+        <!-- Logger has NO memory access to client/server - demonstrates isolation -->
+    </protection_domain>
+
+    <!-- Shared memory region (4KB page) - only mapped to client and server -->
     <memory_region name="shared_mem" size="0x1000" page_size="0x1000" />
 
     <!-- IPC channel between client and server -->
     <channel>
         <end pd="server" id="0" />
         <end pd="client" id="0" pp="true" badge="1" />
+    </channel>
+
+    <!-- Notification channel: client -> logger -->
+    <channel>
+        <end pd="logger" id="0" />
+        <end pd="client" id="1" />
+    </channel>
+
+    <!-- Notification channel: server -> logger -->
+    <channel>
+        <end pd="logger" id="1" />
+        <end pd="server" id="1" />
     </channel>
 
 </system>
