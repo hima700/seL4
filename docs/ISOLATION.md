@@ -97,3 +97,4 @@ To verify isolation:
 3. Client and server can communicate via endpoint and shared memory
 4. All components can notify logger (logger has notification capabilities)
 
+

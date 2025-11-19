@@ -1,9 +1,8 @@
 #
-# Copyright 2025
-# seL4 Microkit Hello World Makefile
+# Makefile for Fault Tolerance Demo
+# Demonstrates fault containment: crasher fails, others continue
 #
-# SPDX-License-Identifier: BSD-2-Clause
-#
+
 ifeq ($(strip $(BUILD_DIR)),)
 $(error BUILD_DIR must be specified)
 endif
@@ -30,21 +29,21 @@ ifeq ($(ARCH),aarch64)
 else ifeq ($(ARCH),riscv64)
 	TOOLCHAIN := riscv64-unknown-elf
 	CFLAGS_ARCH := -march=rv64imafdc_zicsr_zifencei -mabi=lp64d
-else ifeq ($(ARCH),x86_64)
-	TOOLCHAIN := x86_64-elf
-	CFLAGS_ARCH :=
 else
-$(error Unsupported ARCH: $(ARCH))
+$(error Unsupported ARCH)
 endif
 
 CC := $(TOOLCHAIN)-gcc
 LD := $(TOOLCHAIN)-ld
-AS := $(TOOLCHAIN)-as
 MICROKIT_TOOL ?= $(MICROKIT_SDK)/bin/microkit
 
-HELLO_OBJS := hello.o
+SERVER_OBJS := server.o
+CLIENT_OBJS := client.o
+LOGGER_OBJS := logger.o
+CRASHER_OBJS := crasher.o
 
-IMAGES := hello.elf
+IMAGES := server.elf client.elf logger.elf crasher.elf
+
 CFLAGS := -mstrict-align -nostdlib -ffreestanding -g -O3 -Wall -Wno-unused-function -Werror -I$(BOARD_DIR)/include $(CFLAGS_ARCH)
 LDFLAGS := -L$(BOARD_DIR)/lib
 LIBS := -lmicrokit -Tmicrokit.ld
@@ -57,15 +56,24 @@ all: $(IMAGE_FILE)
 $(BUILD_DIR)/%.o: %.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@
 
-$(BUILD_DIR)/hello.elf: $(addprefix $(BUILD_DIR)/, $(HELLO_OBJS))
+$(BUILD_DIR)/server.elf: $(addprefix $(BUILD_DIR)/, $(SERVER_OBJS))
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+$(BUILD_DIR)/client.elf: $(addprefix $(BUILD_DIR)/, $(CLIENT_OBJS))
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+$(BUILD_DIR)/logger.elf: $(addprefix $(BUILD_DIR)/, $(LOGGER_OBJS))
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+$(BUILD_DIR)/crasher.elf: $(addprefix $(BUILD_DIR)/, $(CRASHER_OBJS))
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 $(IMAGE_FILE) $(REPORT_FILE): $(addprefix $(BUILD_DIR)/, $(IMAGES)) system.system
 	$(MICROKIT_TOOL) system.system --search-path $(BUILD_DIR) --board $(MICROKIT_BOARD) --config $(MICROKIT_CONFIG) -o $(IMAGE_FILE) -r $(REPORT_FILE)
 
-clean:
-	rm -rf $(BUILD_DIR)
-
 .PHONY: all clean
+
+clean:
+	rm -f $(BUILD_DIR)/*.o $(BUILD_DIR)/*.elf $(IMAGE_FILE) $(REPORT_FILE)
 
 

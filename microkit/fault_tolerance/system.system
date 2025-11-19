@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright 2025
+ seL4 Microkit Fault Tolerance Demo System Configuration
+ 
+ Demonstrates fault containment: crasher component fails, but server and logger continue.
+ 
+ SPDX-License-Identifier: BSD-2-Clause
+-->
+<system>
+    <!-- Server protection domain (continues after crasher fails) -->
+    <protection_domain name="server" priority="100">
+        <program_image path="server.elf" />
+    </protection_domain>
+
+    <!-- Client protection domain (continues after crasher fails) -->
+    <protection_domain name="client" priority="99">
+        <program_image path="client.elf" />
+    </protection_domain>
+
+    <!-- Logger protection domain (continues after crasher fails) -->
+    <protection_domain name="logger" priority="98">
+        <program_image path="logger.elf" />
+    </protection_domain>
+
+    <!-- Crasher protection domain (will intentionally crash) -->
+    <protection_domain name="crasher" priority="97">
+        <program_image path="crasher.elf" />
+    </protection_domain>
+
+    <!-- IPC channel: client -> server -->
+    <channel>
+        <end pd="server" id="0" />
+        <end pd="client" id="0" pp="true" />
+    </channel>
+
+    <!-- IPC channel: crasher -> server -->
+    <channel>
+        <end pd="server" id="1" />
+        <end pd="crasher" id="0" pp="true" />
+    </channel>
+
+    <!-- Notification channel: client -> logger -->
+    <channel>
+        <end pd="logger" id="0" />
+        <end pd="client" id="1" />
+    </channel>
+
+    <!-- Notification channel: server -> logger -->
+    <channel>
+        <end pd="logger" id="1" />
+        <end pd="server" id="2" />
+    </channel>
+
+    <!-- Notification channel: crasher -> logger -->
+    <channel>
+        <end pd="logger" id="2" />
+        <end pd="crasher" id="1" />
+    </channel>
+
+</system>
+
+

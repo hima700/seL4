@@ -19,3 +19,4 @@ void notified(microkit_channel ch)
     /* No notifications expected in hello world */
 }
 
+

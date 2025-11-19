@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Build script for seL4 Microkit applications
-# Usage: ./build.sh [hello_world|ipc_demo] [board] [config]
+# Usage: ./build.sh [hello_world|ipc_demo|fault_tolerance] [board] [config]
 #
 
 set -e

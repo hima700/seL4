@@ -29,3 +29,4 @@ echo "Toolchain added to PATH: $TOOLCHAIN_BIN"
 echo "Verifying installation..."
 aarch64-none-elf-gcc --version | head -1
 
+
