@@ -161,21 +161,21 @@ Remove build artifacts:
 - Build and run scripts implemented
 - **Verification**: Hello world runs successfully in QEMU, outputs expected messages
 
-**Step 2: IPC Client-Server Implementation** ✅ **TESTED AND WORKING**
+**Step 2: IPC Client-Server Implementation**  **TESTED AND WORKING**
 - Client component with message passing
 - Server component with protected call handler
 - Shared memory communication (4KB region)
 - Reply objects for request/response protocol
 - **Verification**: Client-server IPC works, shared memory read/write confirmed
 
-**Step 3: Component Isolation** ✅ **TESTED AND WORKING**
+**Step 3: Component Isolation**  **TESTED AND WORKING**
 - Logger component as third protection domain
 - VSpace isolation (separate virtual address spaces)
 - CSpace isolation (separate capability spaces)
 - Least-privilege enforcement (logger has notifications only, no memory access)
 - **Verification**: All three components run, logger isolated with minimal capabilities
 
-**Step 4: Fault Tolerance Demonstration** ✅ **TESTED AND WORKING**
+**Step 4: Fault Tolerance Demonstration**  **TESTED AND WORKING**
 - Crasher component intentionally fails to demonstrate fault containment
 - Server, client, and logger continue operating after crasher crash
 - Log capture script for fault analysis
@@ -187,7 +187,7 @@ Remove build artifacts:
   - Logger continues capturing events
   - Fault containment proven - no propagation to other components
 
-**Step 5: Comparison Against Linux (User-Space)** ✅ **IMPLEMENTED**
+**Step 5: Comparison Against Linux (User-Space)**  **IMPLEMENTED**
 - Linux equivalent client-server-logger using sockets/IPC
 - Shared memory via POSIX shared memory (`shm_open`/`mmap`)
 - Logger via Unix domain sockets (UDP)
@@ -196,7 +196,7 @@ Remove build artifacts:
 - **Run**: `./scripts/run_linux.sh [iterations]`
 - **Compare**: `./scripts/compare_metrics.sh [iterations]`
 
-**Step 6: Reproducible Build/Run/Measure Harness** ✅ **IMPLEMENTED**
+**Step 6: Reproducible Build/Run/Measure Harness**  **IMPLEMENTED**
 - One-command metrics pipeline: `./scripts/run_all_metrics.sh [iterations]`
 - Metrics runner: `./scripts/run_metrics.sh [app] [board] [config] [iterations]`
 - RDTSC/CLOCK_MONOTONIC_RAW timestamping in client PD
