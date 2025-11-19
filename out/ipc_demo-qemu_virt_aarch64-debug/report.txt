@@ -1,0 +1,800 @@
+# Kernel Boot Info
+
+    # of fixed caps     :       16
+    # of page table caps:        2
+    # of page caps      :       10
+    # of untyped objects:       68
+
+# Loader Regions
+
+       <Region name=PD-ELF server-0 addr=0x60246000 size=2848>
+       <Region name=PD-ELF server-1 addr=0x60247000 size=144>
+       <Region name=PD-ELF client-0 addr=0x60248000 size=3336>
+       <Region name=PD-ELF client-1 addr=0x60249000 size=144>
+       <Region name=PD-ELF logger-0 addr=0x6024a000 size=2757>
+       <Region name=PD-ELF logger-1 addr=0x6024b000 size=400>
+
+# Monitor (Initial Task) Info
+
+     virtual memory : MemoryRegion(base=0x8a000000, end=0x8a00a000)
+     physical memory: MemoryRegion(base=0x6024c000, end=0x60256000)
+
+# Allocated Kernel Objects Summary
+
+     # of allocated objects: 48
+
+# Bootstrap Kernel Invocations Summary
+
+     # of invocations   :          9
+     size of invocations:        616
+
+# System Kernel Invocations Summary
+
+     # of invocations   :         86
+     size of invocations:      6,008
+
+# Allocated Kernel Objects Detail
+
+    Page(4 KiB): MR=ELF:server-0 @ 60246000            9 cap_addr=8000000000000003 phys_addr=60246000
+    Page(4 KiB): MR=ELF:server-1 @ 60247000            9 cap_addr=8000000000000004 phys_addr=60247000
+    Page(4 KiB): MR=ELF:client-0 @ 60248000            9 cap_addr=8000000000000005 phys_addr=60248000
+    Page(4 KiB): MR=ELF:client-1 @ 60249000            9 cap_addr=8000000000000006 phys_addr=60249000
+    Page(4 KiB): MR=ELF:logger-0 @ 6024a000            9 cap_addr=8000000000000007 phys_addr=6024a000
+    Page(4 KiB): MR=ELF:logger-1 @ 6024b000            9 cap_addr=8000000000000008 phys_addr=6024b000
+    Page(4 KiB): IPC Buffer PD=server                  9 cap_addr=8000000000000009 phys_addr=60003000
+    Page(4 KiB): IPC Buffer PD=client                  9 cap_addr=800000000000000a phys_addr=60004000
+    Page(4 KiB): IPC Buffer PD=logger                  9 cap_addr=800000000000000b phys_addr=60005000
+    Page(4 KiB): MR=shared_mem #0                      9 cap_addr=800000000000000c phys_addr=60006000
+    Page(4 KiB): MR=STACK:server #0                    9 cap_addr=800000000000000d phys_addr=60007000
+    Page(4 KiB): MR=STACK:client #0                    9 cap_addr=800000000000000e phys_addr=60008000
+    Page(4 KiB): MR=STACK:logger #0                    9 cap_addr=800000000000000f phys_addr=60009000
+    TCB: PD=server                                     1 cap_addr=8000000000000010 phys_addr=6000a000
+    TCB: PD=client                                     1 cap_addr=8000000000000011 phys_addr=6000a800
+    TCB: PD=logger                                     1 cap_addr=8000000000000012 phys_addr=6000b000
+    SchedContext: PD=server                            5 cap_addr=8000000000000013 phys_addr=6000b800
+    SchedContext: PD=client                            5 cap_addr=8000000000000014 phys_addr=6000b900
+    SchedContext: PD=logger                            5 cap_addr=8000000000000015 phys_addr=6000ba00
+    Reply: Monitor                                     6 cap_addr=8000000000000016 phys_addr=6000bb00
+    Reply: PD=server                                   6 cap_addr=8000000000000017 phys_addr=6000bb20
+    Reply: PD=client                                   6 cap_addr=8000000000000018 phys_addr=6000bb40
+    Reply: PD=logger                                   6 cap_addr=8000000000000019 phys_addr=6000bb60
+    EP: Monitor Fault                                  2 cap_addr=800000000000001a phys_addr=6000bb80
+    EP: PD=server                                      2 cap_addr=800000000000001b phys_addr=6000bb90
+    Notification: PD=server                            3 cap_addr=800000000000001c phys_addr=6000bbc0
+    Notification: PD=client                            3 cap_addr=800000000000001d phys_addr=6000bc00
+    Notification: PD=logger                            3 cap_addr=800000000000001e phys_addr=6000bc40
+    VSpace: PD=server                                  8 cap_addr=800000000000001f phys_addr=60258000
+    VSpace: PD=client                                  8 cap_addr=8000000000000020 phys_addr=6025a000
+    VSpace: PD=logger                                  8 cap_addr=8000000000000021 phys_addr=6025c000
+    PageTable: PD=server VADDR=0x0                     11 cap_addr=8000000000000022 phys_addr=60260000
+    PageTable: PD=server VADDR=0xffc0000000            11 cap_addr=8000000000000023 phys_addr=60261000
+    PageTable: PD=client VADDR=0x0                     11 cap_addr=8000000000000024 phys_addr=60262000
+    PageTable: PD=client VADDR=0xffc0000000            11 cap_addr=8000000000000025 phys_addr=60263000
+    PageTable: PD=logger VADDR=0x0                     11 cap_addr=8000000000000026 phys_addr=60264000
+    PageTable: PD=logger VADDR=0xffc0000000            11 cap_addr=8000000000000027 phys_addr=60265000
+    PageTable: PD=server VADDR=0x200000                11 cap_addr=8000000000000028 phys_addr=60266000
+    PageTable: PD=server VADDR=0x20000000              11 cap_addr=8000000000000029 phys_addr=60267000
+    PageTable: PD=server VADDR=0xffffe00000            11 cap_addr=800000000000002a phys_addr=60268000
+    PageTable: PD=client VADDR=0x200000                11 cap_addr=800000000000002b phys_addr=60269000
+    PageTable: PD=client VADDR=0x20000000              11 cap_addr=800000000000002c phys_addr=6026a000
+    PageTable: PD=client VADDR=0xffffe00000            11 cap_addr=800000000000002d phys_addr=6026b000
+    PageTable: PD=logger VADDR=0x200000                11 cap_addr=800000000000002e phys_addr=6026c000
+    PageTable: PD=logger VADDR=0xffffe00000            11 cap_addr=800000000000002f phys_addr=6026d000
+    CNode: PD=server                                   4 cap_addr=8000000000000030 phys_addr=60270000
+    CNode: PD=client                                   4 cap_addr=8000000000000031 phys_addr=60274000
+    CNode: PD=logger                                   4 cap_addr=8000000000000032 phys_addr=60278000
+
+# Bootstrap Kernel Invocations Detail
+
+    0x0000 Untyped              - Retype            - 0x0000000000000042 (Untyped @ 0x60000000:0x10000)
+         object_type          4 (SEL4_CNODE_OBJECT - variable size)
+         size_bits            1 (0x2)
+         root (cap)           0x0000000000000002 (CNode: init)
+         node_index           0
+         node_depth           0
+         node_offset          97
+         num_objects          1
+    0x0001 CNode                - Mint              - 0x0000000000000061 (CNode: root)
+         dest_index           0
+         dest_depth           1
+         src_root (cap)       0x0000000000000002 (CNode: init)
+         src_obj (cap)        0x0000000000000002 (CNode: init)
+         src_depth            64
+         rights               15
+         badge                51
+    0x0002 TCB                  - SetSpace          - 0x0000000000000001 (TCB: init)
+         fault_ep (cap)       0x0000000000000000 (null)
+         cspace_root (cap)    0x0000000000000061 (CNode: root)
+         cspace_root_data     0
+         vspace_root (cap)    0x0000000000000003 (VSpace: init)
+         vspace_root_data     0
+    0x0003 Untyped              - Retype            - 0x0000000000000042 (Untyped @ 0x60000000:0x10000)
+         object_type          4 (SEL4_CNODE_OBJECT - variable size)
+         size_bits            7 (0x80)
+         root (cap)           0x0000000000000002 (CNode: init)
+         node_index           0
+         node_depth           0
+         node_offset          98
+         num_objects          1
+    0x0004 CNode                - Mint              - 0x0000000000000061 (CNode: root)
+         dest_index           1
+         dest_depth           1
+         src_root (cap)       0x0000000000000002 (CNode: init)
+         src_obj (cap)        0x0000000000000062 (CNode: system)
+         src_depth            64
+         rights               15
+         badge                56
+    0x0005 Untyped              - Retype            - 0x000000000000001d (Untyped @ 0x60244000:0x4000 (device))
+         object_type          9 (SEL4_SMALL_PAGE_OBJECT - 0x1000)
+         size_bits            0 (N/A)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          0
+         num_objects          2
+    0x0006 Untyped              - Retype            - 0x0000000000000042 (Untyped @ 0x60000000:0x10000)
+         object_type          11 (SEL4_PAGE_TABLE_OBJECT - 0x1000)
+         size_bits            0 (N/A)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          2
+         num_objects          1
+    0x0007 Page Table           - Map               - 0x8000000000000002 (PageTable: monitor)
+         vspace (cap)         0x0000000000000003 (VSpace: init)
+         vaddr                0x80000000
+         attr                 3
+    0x0008 Page                 - Map               - 0x8000000000000000 (SmallPage: monitor invocation table)
+         vspace (cap)         0x0000000000000003 (VSpace: init)
+         vaddr                0x80000000
+         rights               2
+         attr                 7
+      REPEAT: count=2
+
+# System Kernel Invocations Detail
+
+    0x0000 Untyped              - Retype            - 0x000000000000001d (Untyped @ 0x60244000:0x4000 (device))
+         object_type          9 (SEL4_SMALL_PAGE_OBJECT - 0x1000)
+         size_bits            0 (N/A)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          3
+         num_objects          1
+    0x0001 Untyped              - Retype            - 0x000000000000001d (Untyped @ 0x60244000:0x4000 (device))
+         object_type          9 (SEL4_SMALL_PAGE_OBJECT - 0x1000)
+         size_bits            0 (N/A)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          4
+         num_objects          1
+    0x0002 Untyped              - Retype            - 0x000000000000001e (Untyped @ 0x60248000:0x4000 (device))
+         object_type          9 (SEL4_SMALL_PAGE_OBJECT - 0x1000)
+         size_bits            0 (N/A)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          5
+         num_objects          1
+    0x0003 Untyped              - Retype            - 0x000000000000001e (Untyped @ 0x60248000:0x4000 (device))
+         object_type          9 (SEL4_SMALL_PAGE_OBJECT - 0x1000)
+         size_bits            0 (N/A)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          6
+         num_objects          1
+    0x0004 Untyped              - Retype            - 0x000000000000001e (Untyped @ 0x60248000:0x4000 (device))
+         object_type          9 (SEL4_SMALL_PAGE_OBJECT - 0x1000)
+         size_bits            0 (N/A)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          7
+         num_objects          1
+    0x0005 Untyped              - Retype            - 0x000000000000001e (Untyped @ 0x60248000:0x4000 (device))
+         object_type          9 (SEL4_SMALL_PAGE_OBJECT - 0x1000)
+         size_bits            0 (N/A)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          8
+         num_objects          1
+    0x0006 Untyped              - Retype            - 0x0000000000000042 (Untyped @ 0x60000000:0x10000)
+         object_type          9 (SEL4_SMALL_PAGE_OBJECT - 0x1000)
+         size_bits            0 (N/A)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          9
+         num_objects          7
+    0x0007 Untyped              - Retype            - 0x0000000000000042 (Untyped @ 0x60000000:0x10000)
+         object_type          1 (SEL4_TCB_OBJECT - 0x800)
+         size_bits            0 (N/A)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          16
+         num_objects          3
+    0x0008 Untyped              - Retype            - 0x0000000000000042 (Untyped @ 0x60000000:0x10000)
+         object_type          5 (SEL4_SCHEDCONTEXT_OBJECT - variable size)
+         size_bits            8 (0x100)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          19
+         num_objects          3
+    0x0009 Untyped              - Retype            - 0x0000000000000042 (Untyped @ 0x60000000:0x10000)
+         object_type          6 (SEL4_REPLY_OBJECT - 0x20)
+         size_bits            0 (N/A)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          22
+         num_objects          4
+    0x000a Untyped              - Retype            - 0x0000000000000042 (Untyped @ 0x60000000:0x10000)
+         object_type          2 (SEL4_ENDPOINT_OBJECT - 0x10)
+         size_bits            0 (N/A)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          26
+         num_objects          2
+    0x000b Untyped              - Retype            - 0x0000000000000042 (Untyped @ 0x60000000:0x10000)
+         object_type          3 (SEL4_NOTIFICATION_OBJECT - 0x40)
+         size_bits            0 (N/A)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          28
+         num_objects          3
+    0x000c Untyped              - Retype            - 0x0000000000000044 (Untyped @ 0x60258000:0x8000)
+         object_type          8 (SEL4_VSPACE_OBJECT - 0x2000)
+         size_bits            0 (N/A)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          31
+         num_objects          3
+    0x000d Untyped              - Retype            - 0x0000000000000045 (Untyped @ 0x60260000:0x20000)
+         object_type          11 (SEL4_PAGE_TABLE_OBJECT - 0x1000)
+         size_bits            0 (N/A)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          34
+         num_objects          6
+    0x000e Untyped              - Retype            - 0x0000000000000045 (Untyped @ 0x60260000:0x20000)
+         object_type          11 (SEL4_PAGE_TABLE_OBJECT - 0x1000)
+         size_bits            0 (N/A)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          40
+         num_objects          8
+    0x000f Untyped              - Retype            - 0x0000000000000045 (Untyped @ 0x60260000:0x20000)
+         object_type          4 (SEL4_CNODE_OBJECT - variable size)
+         size_bits            9 (0x200)
+         root (cap)           0x0000000000000061 (CNode: root)
+         node_index           1
+         node_depth           1
+         node_offset          48
+         num_objects          3
+    0x0010 ASID Pool            - Assign            - 0x0000000000000006 (ASID Pool: init)
+         vspace (cap)         0x800000000000001f (VSpace: PD=server)
+      REPEAT: count=3
+    0x0011 CNode                - Mint              - 0x0000000000000062 (CNode: system)
+         dest_index           51
+         dest_depth           7
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000000c (Page(4 KiB): MR=shared_mem #0)
+         src_depth            64
+         rights               3
+         badge                0
+    0x0012 CNode                - Mint              - 0x0000000000000062 (CNode: system)
+         dest_index           52
+         dest_depth           7
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x8000000000000003 (Page(4 KiB): MR=ELF:server-0 @ 60246000)
+         src_depth            64
+         rights               2
+         badge                0
+    0x0013 CNode                - Mint              - 0x0000000000000062 (CNode: system)
+         dest_index           53
+         dest_depth           7
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x8000000000000004 (Page(4 KiB): MR=ELF:server-1 @ 60247000)
+         src_depth            64
+         rights               3
+         badge                0
+    0x0014 CNode                - Mint              - 0x0000000000000062 (CNode: system)
+         dest_index           54
+         dest_depth           7
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000000d (Page(4 KiB): MR=STACK:server #0)
+         src_depth            64
+         rights               3
+         badge                0
+    0x0015 CNode                - Mint              - 0x0000000000000062 (CNode: system)
+         dest_index           55
+         dest_depth           7
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000000c (Page(4 KiB): MR=shared_mem #0)
+         src_depth            64
+         rights               3
+         badge                0
+    0x0016 CNode                - Mint              - 0x0000000000000062 (CNode: system)
+         dest_index           56
+         dest_depth           7
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x8000000000000005 (Page(4 KiB): MR=ELF:client-0 @ 60248000)
+         src_depth            64
+         rights               2
+         badge                0
+    0x0017 CNode                - Mint              - 0x0000000000000062 (CNode: system)
+         dest_index           57
+         dest_depth           7
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x8000000000000006 (Page(4 KiB): MR=ELF:client-1 @ 60249000)
+         src_depth            64
+         rights               3
+         badge                0
+    0x0018 CNode                - Mint              - 0x0000000000000062 (CNode: system)
+         dest_index           58
+         dest_depth           7
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000000e (Page(4 KiB): MR=STACK:client #0)
+         src_depth            64
+         rights               3
+         badge                0
+    0x0019 CNode                - Mint              - 0x0000000000000062 (CNode: system)
+         dest_index           59
+         dest_depth           7
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x8000000000000007 (Page(4 KiB): MR=ELF:logger-0 @ 6024a000)
+         src_depth            64
+         rights               2
+         badge                0
+    0x001a CNode                - Mint              - 0x0000000000000062 (CNode: system)
+         dest_index           60
+         dest_depth           7
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x8000000000000008 (Page(4 KiB): MR=ELF:logger-1 @ 6024b000)
+         src_depth            64
+         rights               3
+         badge                0
+    0x001b CNode                - Mint              - 0x0000000000000062 (CNode: system)
+         dest_index           61
+         dest_depth           7
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000000f (Page(4 KiB): MR=STACK:logger #0)
+         src_depth            64
+         rights               3
+         badge                0
+    0x001c CNode                - Mint              - 0x0000000000000062 (CNode: system)
+         dest_index           62
+         dest_depth           7
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000001a (EP: Monitor Fault)
+         src_depth            64
+         rights               15
+         badge                1
+    0x001d CNode                - Mint              - 0x0000000000000062 (CNode: system)
+         dest_index           63
+         dest_depth           7
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000001a (EP: Monitor Fault)
+         src_depth            64
+         rights               15
+         badge                2
+    0x001e CNode                - Mint              - 0x0000000000000062 (CNode: system)
+         dest_index           64
+         dest_depth           7
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000001a (EP: Monitor Fault)
+         src_depth            64
+         rights               15
+         badge                3
+    0x001f CNode                - Mint              - 0x8000000000000030 (CNode: PD=server)
+         dest_index           1
+         dest_depth           9
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000001b (EP: PD=server)
+         src_depth            64
+         rights               15
+         badge                0
+    0x0020 CNode                - Mint              - 0x8000000000000031 (CNode: PD=client)
+         dest_index           1
+         dest_depth           9
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000001d (Notification: PD=client)
+         src_depth            64
+         rights               15
+         badge                0
+    0x0021 CNode                - Mint              - 0x8000000000000032 (CNode: PD=logger)
+         dest_index           1
+         dest_depth           9
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000001e (Notification: PD=logger)
+         src_depth            64
+         rights               15
+         badge                0
+    0x0022 CNode                - Mint              - 0x8000000000000030 (CNode: PD=server)
+         dest_index           4
+         dest_depth           9
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x8000000000000017 (Reply: PD=server)
+         src_depth            64
+         rights               15
+         badge                1
+      REPEAT: count=3
+    0x0023 CNode                - Mint              - 0x8000000000000030 (CNode: PD=server)
+         dest_index           3
+         dest_depth           9
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000001f (VSpace: PD=server)
+         src_depth            64
+         rights               15
+         badge                0
+      REPEAT: count=3
+    0x0024 CNode                - Mint              - 0x8000000000000030 (CNode: PD=server)
+         dest_index           10
+         dest_depth           9
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000001d (Notification: PD=client)
+         src_depth            64
+         rights               15
+         badge                1
+    0x0025 CNode                - Mint              - 0x8000000000000031 (CNode: PD=client)
+         dest_index           10
+         dest_depth           9
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000001c (Notification: PD=server)
+         src_depth            64
+         rights               15
+         badge                1
+    0x0026 CNode                - Mint              - 0x8000000000000031 (CNode: PD=client)
+         dest_index           74
+         dest_depth           9
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000001b (EP: PD=server)
+         src_depth            64
+         rights               15
+         badge                9223372036854775808
+    0x0027 CNode                - Mint              - 0x8000000000000032 (CNode: PD=logger)
+         dest_index           10
+         dest_depth           9
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000001d (Notification: PD=client)
+         src_depth            64
+         rights               15
+         badge                2
+    0x0028 CNode                - Mint              - 0x8000000000000031 (CNode: PD=client)
+         dest_index           11
+         dest_depth           9
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000001e (Notification: PD=logger)
+         src_depth            64
+         rights               15
+         badge                1
+    0x0029 CNode                - Mint              - 0x8000000000000032 (CNode: PD=logger)
+         dest_index           11
+         dest_depth           9
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000001c (Notification: PD=server)
+         src_depth            64
+         rights               15
+         badge                2
+    0x002a CNode                - Mint              - 0x8000000000000030 (CNode: PD=server)
+         dest_index           11
+         dest_depth           9
+         src_root (cap)       0x0000000000000061 (CNode: root)
+         src_obj (cap)        0x800000000000001e (Notification: PD=logger)
+         src_depth            64
+         rights               15
+         badge                2
+    0x002b Page Table           - Map               - 0x8000000000000022 (PageTable: PD=server VADDR=0x0)
+         vspace (cap)         0x800000000000001f (VSpace: PD=server)
+         vaddr                0x0
+         attr                 3
+    0x002c Page Table           - Map               - 0x8000000000000023 (PageTable: PD=server VADDR=0xffc0000000)
+         vspace (cap)         0x800000000000001f (VSpace: PD=server)
+         vaddr                0xffc0000000
+         attr                 3
+    0x002d Page Table           - Map               - 0x8000000000000024 (PageTable: PD=client VADDR=0x0)
+         vspace (cap)         0x8000000000000020 (VSpace: PD=client)
+         vaddr                0x0
+         attr                 3
+    0x002e Page Table           - Map               - 0x8000000000000025 (PageTable: PD=client VADDR=0xffc0000000)
+         vspace (cap)         0x8000000000000020 (VSpace: PD=client)
+         vaddr                0xffc0000000
+         attr                 3
+    0x002f Page Table           - Map               - 0x8000000000000026 (PageTable: PD=logger VADDR=0x0)
+         vspace (cap)         0x8000000000000021 (VSpace: PD=logger)
+         vaddr                0x0
+         attr                 3
+    0x0030 Page Table           - Map               - 0x8000000000000027 (PageTable: PD=logger VADDR=0xffc0000000)
+         vspace (cap)         0x8000000000000021 (VSpace: PD=logger)
+         vaddr                0xffc0000000
+         attr                 3
+    0x0031 Page Table           - Map               - 0x8000000000000028 (PageTable: PD=server VADDR=0x200000)
+         vspace (cap)         0x800000000000001f (VSpace: PD=server)
+         vaddr                0x200000
+         attr                 3
+    0x0032 Page Table           - Map               - 0x8000000000000029 (PageTable: PD=server VADDR=0x20000000)
+         vspace (cap)         0x800000000000001f (VSpace: PD=server)
+         vaddr                0x20000000
+         attr                 3
+    0x0033 Page Table           - Map               - 0x800000000000002a (PageTable: PD=server VADDR=0xffffe00000)
+         vspace (cap)         0x800000000000001f (VSpace: PD=server)
+         vaddr                0xffffe00000
+         attr                 3
+    0x0034 Page Table           - Map               - 0x800000000000002b (PageTable: PD=client VADDR=0x200000)
+         vspace (cap)         0x8000000000000020 (VSpace: PD=client)
+         vaddr                0x200000
+         attr                 3
+    0x0035 Page Table           - Map               - 0x800000000000002c (PageTable: PD=client VADDR=0x20000000)
+         vspace (cap)         0x8000000000000020 (VSpace: PD=client)
+         vaddr                0x20000000
+         attr                 3
+    0x0036 Page Table           - Map               - 0x800000000000002d (PageTable: PD=client VADDR=0xffffe00000)
+         vspace (cap)         0x8000000000000020 (VSpace: PD=client)
+         vaddr                0xffffe00000
+         attr                 3
+    0x0037 Page Table           - Map               - 0x800000000000002e (PageTable: PD=logger VADDR=0x200000)
+         vspace (cap)         0x8000000000000021 (VSpace: PD=logger)
+         vaddr                0x200000
+         attr                 3
+    0x0038 Page Table           - Map               - 0x800000000000002f (PageTable: PD=logger VADDR=0xffffe00000)
+         vspace (cap)         0x8000000000000021 (VSpace: PD=logger)
+         vaddr                0xffffe00000
+         attr                 3
+    0x0039 Page                 - Map               - 0x8000000000000033 (Page(4 KiB): MR=shared_mem #0 (derived))
+         vspace (cap)         0x800000000000001f (VSpace: PD=server)
+         vaddr                0x20000000
+         rights               3
+         attr                 7
+    0x003a Page                 - Map               - 0x8000000000000034 (Page(4 KiB): MR=ELF:server-0 @ 60246000 (derived))
+         vspace (cap)         0x800000000000001f (VSpace: PD=server)
+         vaddr                0x200000
+         rights               2
+         attr                 3
+    0x003b Page                 - Map               - 0x8000000000000035 (Page(4 KiB): MR=ELF:server-1 @ 60247000 (derived))
+         vspace (cap)         0x800000000000001f (VSpace: PD=server)
+         vaddr                0x201000
+         rights               3
+         attr                 7
+    0x003c Page                 - Map               - 0x8000000000000036 (Page(4 KiB): MR=STACK:server #0 (derived))
+         vspace (cap)         0x800000000000001f (VSpace: PD=server)
+         vaddr                0xfffffff000
+         rights               3
+         attr                 7
+    0x003d Page                 - Map               - 0x8000000000000037 (Page(4 KiB): MR=shared_mem #0 (derived))
+         vspace (cap)         0x8000000000000020 (VSpace: PD=client)
+         vaddr                0x20000000
+         rights               3
+         attr                 7
+    0x003e Page                 - Map               - 0x8000000000000038 (Page(4 KiB): MR=ELF:client-0 @ 60248000 (derived))
+         vspace (cap)         0x8000000000000020 (VSpace: PD=client)
+         vaddr                0x200000
+         rights               2
+         attr                 3
+    0x003f Page                 - Map               - 0x8000000000000039 (Page(4 KiB): MR=ELF:client-1 @ 60249000 (derived))
+         vspace (cap)         0x8000000000000020 (VSpace: PD=client)
+         vaddr                0x201000
+         rights               3
+         attr                 7
+    0x0040 Page                 - Map               - 0x800000000000003a (Page(4 KiB): MR=STACK:client #0 (derived))
+         vspace (cap)         0x8000000000000020 (VSpace: PD=client)
+         vaddr                0xfffffff000
+         rights               3
+         attr                 7
+    0x0041 Page                 - Map               - 0x800000000000003b (Page(4 KiB): MR=ELF:logger-0 @ 6024a000 (derived))
+         vspace (cap)         0x8000000000000021 (VSpace: PD=logger)
+         vaddr                0x200000
+         rights               2
+         attr                 3
+    0x0042 Page                 - Map               - 0x800000000000003c (Page(4 KiB): MR=ELF:logger-1 @ 6024b000 (derived))
+         vspace (cap)         0x8000000000000021 (VSpace: PD=logger)
+         vaddr                0x201000
+         rights               3
+         attr                 7
+    0x0043 Page                 - Map               - 0x800000000000003d (Page(4 KiB): MR=STACK:logger #0 (derived))
+         vspace (cap)         0x8000000000000021 (VSpace: PD=logger)
+         vaddr                0xfffffff000
+         rights               3
+         attr                 7
+    0x0044 Page                 - Map               - 0x8000000000000009 (Page(4 KiB): IPC Buffer PD=server)
+         vspace (cap)         0x800000000000001f (VSpace: PD=server)
+         vaddr                0x202000
+         rights               3
+         attr                 7
+    0x0045 Page                 - Map               - 0x800000000000000a (Page(4 KiB): IPC Buffer PD=client)
+         vspace (cap)         0x8000000000000020 (VSpace: PD=client)
+         vaddr                0x202000
+         rights               3
+         attr                 7
+    0x0046 Page                 - Map               - 0x800000000000000b (Page(4 KiB): IPC Buffer PD=logger)
+         vspace (cap)         0x8000000000000021 (VSpace: PD=logger)
+         vaddr                0x202000
+         rights               3
+         attr                 7
+    0x0047 SchedControl         - ConfigureFlags    - 0x0000000000000012 (None)
+         schedcontext (cap)   0x8000000000000013 (SchedContext: PD=server)
+         budget               1000
+         period               1000
+         extra_refills        0
+         badge                256
+         flags                0
+    0x0048 SchedControl         - ConfigureFlags    - 0x0000000000000012 (None)
+         schedcontext (cap)   0x8000000000000014 (SchedContext: PD=client)
+         budget               1000
+         period               1000
+         extra_refills        0
+         badge                257
+         flags                0
+    0x0049 SchedControl         - ConfigureFlags    - 0x0000000000000012 (None)
+         schedcontext (cap)   0x8000000000000015 (SchedContext: PD=logger)
+         budget               1000
+         period               1000
+         extra_refills        0
+         badge                258
+         flags                0
+    0x004a TCB                  - SetSchedParams    - 0x8000000000000010 (TCB: PD=server)
+         authority (cap)      0x0000000000000001 (TCB: init)
+         mcp                  100
+         priority             100
+         sched_context (cap)  0x8000000000000013 (SchedContext: PD=server)
+         fault_ep (cap)       0x800000000000001a (EP: Monitor Fault)
+    0x004b TCB                  - SetSchedParams    - 0x8000000000000011 (TCB: PD=client)
+         authority (cap)      0x0000000000000001 (TCB: init)
+         mcp                  99
+         priority             99
+         sched_context (cap)  0x8000000000000014 (SchedContext: PD=client)
+         fault_ep (cap)       0x800000000000001a (EP: Monitor Fault)
+    0x004c TCB                  - SetSchedParams    - 0x8000000000000012 (TCB: PD=logger)
+         authority (cap)      0x0000000000000001 (TCB: init)
+         mcp                  98
+         priority             98
+         sched_context (cap)  0x8000000000000015 (SchedContext: PD=logger)
+         fault_ep (cap)       0x800000000000001a (EP: Monitor Fault)
+    0x004d TCB                  - SetSpace          - 0x8000000000000010 (TCB: PD=server)
+         fault_ep (cap)       0x800000000000003e (None)
+         cspace_root (cap)    0x8000000000000030 (CNode: PD=server)
+         cspace_root_data     55
+         vspace_root (cap)    0x800000000000001f (VSpace: PD=server)
+         vspace_root_data     0
+      REPEAT: count=3
+    0x004e TCB                  - SetIPCBuffer      - 0x8000000000000010 (TCB: PD=server)
+         buffer               0x202000
+         buffer_frame (cap)   0x8000000000000009 (Page(4 KiB): IPC Buffer PD=server)
+    0x004f TCB                  - SetIPCBuffer      - 0x8000000000000011 (TCB: PD=client)
+         buffer               0x202000
+         buffer_frame (cap)   0x800000000000000a (Page(4 KiB): IPC Buffer PD=client)
+    0x0050 TCB                  - SetIPCBuffer      - 0x8000000000000012 (TCB: PD=logger)
+         buffer               0x202000
+         buffer_frame (cap)   0x800000000000000b (Page(4 KiB): IPC Buffer PD=logger)
+    0x0051 TCB                  - WriteRegisters    - 0x8000000000000010 (TCB: PD=server)
+         resume               false
+         arch_flags           0
+         regs                 pc: 0x0000000000200000
+                              sp: 0x0000010000000000
+                              spsr: 0x0000000000000000
+                              x0: 0x0000000000000000
+                              x1: 0x0000000000000000
+                              x2: 0x0000000000000000
+                              x3: 0x0000000000000000
+                              x4: 0x0000000000000000
+                              x5: 0x0000000000000000
+                              x6: 0x0000000000000000
+                              x7: 0x0000000000000000
+                              x8: 0x0000000000000000
+                              x16: 0x0000000000000000
+                              x17: 0x0000000000000000
+                              x18: 0x0000000000000000
+                              x29: 0x0000000000000000
+                              x30: 0x0000000000000000
+                              x9: 0x0000000000000000
+                              x10: 0x0000000000000000
+                              x11: 0x0000000000000000
+                              x12: 0x0000000000000000
+                              x13: 0x0000000000000000
+                              x14: 0x0000000000000000
+                              x15: 0x0000000000000000
+                              x19: 0x0000000000000000
+                              x20: 0x0000000000000000
+                              x21: 0x0000000000000000
+                              x22: 0x0000000000000000
+                              x23: 0x0000000000000000
+                              x24: 0x0000000000000000
+                              x25: 0x0000000000000000
+                              x26: 0x0000000000000000
+                              x27: 0x0000000000000000
+                              x28: 0x0000000000000000
+                              tpidr_el0: 0x0000000000000000
+                              tpidrro_el0: 0x0000000000000000
+    0x0052 TCB                  - WriteRegisters    - 0x8000000000000011 (TCB: PD=client)
+         resume               false
+         arch_flags           0
+         regs                 pc: 0x0000000000200000
+                              sp: 0x0000010000000000
+                              spsr: 0x0000000000000000
+                              x0: 0x0000000000000000
+                              x1: 0x0000000000000000
+                              x2: 0x0000000000000000
+                              x3: 0x0000000000000000
+                              x4: 0x0000000000000000
+                              x5: 0x0000000000000000
+                              x6: 0x0000000000000000
+                              x7: 0x0000000000000000
+                              x8: 0x0000000000000000
+                              x16: 0x0000000000000000
+                              x17: 0x0000000000000000
+                              x18: 0x0000000000000000
+                              x29: 0x0000000000000000
+                              x30: 0x0000000000000000
+                              x9: 0x0000000000000000
+                              x10: 0x0000000000000000
+                              x11: 0x0000000000000000
+                              x12: 0x0000000000000000
+                              x13: 0x0000000000000000
+                              x14: 0x0000000000000000
+                              x15: 0x0000000000000000
+                              x19: 0x0000000000000000
+                              x20: 0x0000000000000000
+                              x21: 0x0000000000000000
+                              x22: 0x0000000000000000
+                              x23: 0x0000000000000000
+                              x24: 0x0000000000000000
+                              x25: 0x0000000000000000
+                              x26: 0x0000000000000000
+                              x27: 0x0000000000000000
+                              x28: 0x0000000000000000
+                              tpidr_el0: 0x0000000000000000
+                              tpidrro_el0: 0x0000000000000000
+    0x0053 TCB                  - WriteRegisters    - 0x8000000000000012 (TCB: PD=logger)
+         resume               false
+         arch_flags           0
+         regs                 pc: 0x0000000000200000
+                              sp: 0x0000010000000000
+                              spsr: 0x0000000000000000
+                              x0: 0x0000000000000000
+                              x1: 0x0000000000000000
+                              x2: 0x0000000000000000
+                              x3: 0x0000000000000000
+                              x4: 0x0000000000000000
+                              x5: 0x0000000000000000
+                              x6: 0x0000000000000000
+                              x7: 0x0000000000000000
+                              x8: 0x0000000000000000
+                              x16: 0x0000000000000000
+                              x17: 0x0000000000000000
+                              x18: 0x0000000000000000
+                              x29: 0x0000000000000000
+                              x30: 0x0000000000000000
+                              x9: 0x0000000000000000
+                              x10: 0x0000000000000000
+                              x11: 0x0000000000000000
+                              x12: 0x0000000000000000
+                              x13: 0x0000000000000000
+                              x14: 0x0000000000000000
+                              x15: 0x0000000000000000
+                              x19: 0x0000000000000000
+                              x20: 0x0000000000000000
+                              x21: 0x0000000000000000
+                              x22: 0x0000000000000000
+                              x23: 0x0000000000000000
+                              x24: 0x0000000000000000
+                              x25: 0x0000000000000000
+                              x26: 0x0000000000000000
+                              x27: 0x0000000000000000
+                              x28: 0x0000000000000000
+                              tpidr_el0: 0x0000000000000000
+                              tpidrro_el0: 0x0000000000000000
+    0x0054 TCB                  - BindNotification  - 0x8000000000000010 (TCB: PD=server)
+         notification (cap)   0x800000000000001c (Notification: PD=server)
+      REPEAT: count=3
+    0x0055 TCB                  - Resume            - 0x8000000000000010 (TCB: PD=server)
+
+      REPEAT: count=3

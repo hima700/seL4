@@ -1,0 +1,26 @@
+# Build outputs
+out/
+*.elf
+*.o
+*.img
+*.bin
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Misc folder (development artifacts, not required for tasks)
+misc/
+

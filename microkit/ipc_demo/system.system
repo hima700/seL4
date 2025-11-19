@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright 2025
+ seL4 Microkit IPC Demo System Configuration
+
+ SPDX-License-Identifier: BSD-2-Clause
+-->
+<system>
+    <!-- Server protection domain -->
+    <protection_domain name="server" priority="100">
+        <program_image path="server.elf" />
+        <map mr="shared_mem" vaddr="0x20000000" perms="rw" setvar_vaddr="shared_buffer" />
+    </protection_domain>
+
+    <!-- Client protection domain -->
+    <protection_domain name="client" priority="99">
+        <program_image path="client.elf" />
+        <map mr="shared_mem" vaddr="0x20000000" perms="rw" setvar_vaddr="shared_buffer" />
+    </protection_domain>
+
+    <!-- Logger protection domain (minimal capabilities) -->
+    <protection_domain name="logger" priority="98">
+        <program_image path="logger.elf" />
+        <!-- Logger has NO memory access to client/server - demonstrates isolation -->
+    </protection_domain>
+
+    <!-- Shared memory region (4KB page) - only mapped to client and server -->
+    <memory_region name="shared_mem" size="0x1000" page_size="0x1000" />
+
+    <!-- IPC channel between client and server -->
+    <channel>
+        <end pd="server" id="0" />
+        <end pd="client" id="0" pp="true" />
+    </channel>
+
+    <!-- Notification channel: client -> logger -->
+    <channel>
+        <end pd="logger" id="0" />
+        <end pd="client" id="1" />
+    </channel>
+
+    <!-- Notification channel: server -> logger -->
+    <channel>
+        <end pd="logger" id="1" />
+        <end pd="server" id="1" />
+    </channel>
+
+</system>
+
